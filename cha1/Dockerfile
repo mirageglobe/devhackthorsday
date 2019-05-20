@@ -17,17 +17,18 @@ ENV TERM=xterm \
 # pre update requirements
 RUN apk add $DEPS
 
-WORKDIR /opt
 EXPOSE 80
 
 # default init
 # COPY xxxxxx./docker-entrypoint.sh /usr/local/bin/
-
 RUN apk add --no-cache tini
-# Tini is now available at /sbin/tini
-ENTRYPOINT ["/sbin/tini -vvv", "--"]
+# RUN chmod +x /tini
 
+COPY docker-entrypoint.sh /
+# RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
- CMD ["tail", "-f", "/dev/null"]
-# CMD ["rc-service nginx start && nginx -t"]
+
+# default command to run
+# CMD ["tail", "-f", "/dev/null"]
 
