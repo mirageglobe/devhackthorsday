@@ -17,17 +17,17 @@ ENV TERM=xterm \
 # pre update requirements
 RUN apk add $DEPS
 
-EXPOSE 80
-
 # default init
 # COPY xxxxxx./docker-entrypoint.sh /usr/local/bin/
 RUN apk add --no-cache tini
 # RUN chmod +x /tini
 
 COPY docker-entrypoint.sh /
-# RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/sbin/tini", "--", "/docker-entrypoint.sh"]
-# ENTRYPOINT ["tail", "-f", "/dev/null"]
+RUN chmod +x /docker-entrypoint.sh
+
+EXPOSE 80
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["/docker-entrypoint.sh"]
 
 # default command to run
 # CMD ["tail", "-f", "/dev/null"]

@@ -44,7 +44,7 @@ deploy-init:
 
 run:																	## run project
 	@echo ":: run project ::"
-	docker run -p 8080:80 -d challengeone
+	docker run -p 8080:80 -d challengeone bash
 
 ##@ Helpers
 
